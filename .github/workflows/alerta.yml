@@ -1,0 +1,22 @@
+name: Alerta Push en Main a ntfy.sh
+
+# Disparador: solo push a la rama main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    name: Notificar a ntfy.sh/devops-itla
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar POST a ntfy.sh
+        run: |
+          curl -s \
+            -H "Title: 🚀 Nuevo Push en Main - DevOps ITLA" \
+            -H "Priority: default" \
+            -H "Tags: rocket,computer" \
+            -d "Se ha publicado un nuevo cambio en la rama main por ${{ github.actor }}. Commit: ${{ github.event.head_commit.message }}." \
+            https://ntfy.sh/devops-itla

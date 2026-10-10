@@ -1,0 +1,261 @@
+/* ============================================================
+   Hola Mundo DevOps ITLA — Estilo iOS Premium / Glassmorphism
+   ============================================================ */
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --text: #fff;
+  --text-dim: rgba(255, 255, 255, 0.72);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --radius-card: 28px;
+  --radius-btn: 18px;
+  --shadow-card: 0 24px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --blue: #0a84ff;
+  --green: #30d158;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  overflow-x: hidden;
+
+  /* Fondo gradiente dinámico tipo iOS: azul profundo → púrpura → magenta */
+  background: linear-gradient(135deg, #0a0a2e, #1b1b6b, #5e2b97, #b83a8e);
+  background-size: 300% 300%;
+  animation: fondoIOS 18s ease-in-out infinite;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fondoIOS {
+  0%   { background-position: 0% 20%; }
+  50%  { background-position: 100% 80%; }
+  100% { background-position: 0% 20%; }
+}
+
+/* Orbes flotantes para profundidad */
+.orbs { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; }
+.orb--1 { width: 480px; height: 480px; left: -140px; top: -120px; background: #0a84ff; animation: flotar 14s ease-in-out infinite alternate; }
+.orb--2 { width: 420px; height: 420px; right: -120px; top: 20%; background: #bf5af2; animation: flotar 18s ease-in-out infinite alternate-reverse; }
+.orb--3 { width: 520px; height: 520px; left: 30%; bottom: -220px; background: #ff375f; opacity: 0.4; animation: flotar 22s ease-in-out infinite alternate; }
+
+@keyframes flotar {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(60px, -40px) scale(1.12); }
+}
+
+/* Escenario */
+.stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+/* Tarjeta glassmorphism */
+.card {
+  width: 100%;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 22px 24px 20px;
+}
+
+/* Status bar estilo iPhone */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+.statusbar__notch {
+  width: 110px;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 999px;
+}
+.statusbar__icons { display: inline-flex; opacity: 0.9; }
+
+/* Badge de CI */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  margin-bottom: 14px;
+}
+.badge__icon { width: 15px; height: 15px; opacity: 0.9; }
+.badge__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.25);
+  animation: pulsar 2s ease-in-out infinite;
+}
+@keyframes pulsar {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.8); opacity: 0.7; }
+}
+.badge__live {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: #ff453a;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+/* Tipografía */
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.title {
+  margin: 0 0 10px;
+  font-size: clamp(38px, 7vw, 54px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+.title__accent {
+  background: linear-gradient(90deg, #7dd3fc, #c4b5fd, #f9a8d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.subtitle { margin: 0 0 20px; color: var(--text-dim); font-size: 16px; line-height: 1.55; }
+.subtitle code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 2px 7px;
+  color: #fff;
+}
+
+/* Botones iOS */
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.btn {
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-btn);
+  padding: 15px 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease, filter 0.2s ease;
+}
+.btn--primary {
+  background: linear-gradient(180deg, #0a84ff, #0066d6);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 28px rgba(10, 132, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.btn--primary:hover { filter: brightness(1.08); }
+.btn--secondary:hover { background: rgba(255, 255, 255, 0.26); }
+
+/* Microinteracción iOS: pulsación */
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 3px solid rgba(10, 132, 255, 0.7); outline-offset: 2px; }
+
+/* Mensaje dinámico */
+.message {
+  min-height: 24px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.message--visible { opacity: 1; transform: translateY(0); }
+
+/* Panel pipeline */
+.pipeline {
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding-top: 14px;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.pipeline__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+.pipeline__label { color: var(--text-dim); font-weight: 600; }
+.pipeline__value {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12.5px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #fff;
+  max-width: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.footer__link { color: #fff; font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.4); }
+.footer__link:hover { opacity: 0.85; }
+
+.credit { margin: 0; font-size: 13px; color: rgba(255,255,255,.65); }
+
+/* Responsivo */
+@media (max-width: 480px) {
+  body { padding: 20px 12px; }
+  .card { padding: 18px 18px 16px; }
+  .actions { grid-template-columns: 1fr; }
+  .statusbar__notch { width: 84px; height: 22px; }
+}
+
+/* Respeta movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  body, .orb, .badge__dot { animation: none; }
+  .btn, .message { transition: none; }
+}

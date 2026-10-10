@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Hola Mundo DevOps ITLA — Práctica de Integración Continua con GitHub Actions + ntfy.sh" />
+  <meta name="theme-color" content="#0a0a2e" />
+  <title>Hola Mundo — DevOps ITLA</title>
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23007AFF'/%3E%3Cstop offset='1' stop-color='%23AF52DE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='600' text-anchor='middle' fill='white' font-family='-apple-system,system-ui'%3EH%3C/text%3E%3C/svg%3E"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Orbes decorativos del fondo (solo visual, aria-hidden) -->
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb--1"></span>
+    <span class="orb orb--2"></span>
+    <span class="orb orb--3"></span>
+  </div>
+
+  <main class="stage">
+    <article class="card" aria-labelledby="titulo">
+      <!-- Status bar estilo iOS -->
+      <header class="statusbar">
+        <span class="statusbar__time" id="hora">9:41</span>
+        <span class="statusbar__notch" aria-hidden="true"></span>
+        <span class="statusbar__icons" aria-hidden="true">
+          <svg viewBox="0 0 20 12" width="20" height="12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="5" width="3" height="7" rx="1"/><rect x="9" y="2.5" width="3" height="9.5" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity=".4"/></svg>
+        </span>
+      </header>
+
+      <!-- Badge de despliegue / CI -->
+      <div class="badge" role="status" aria-live="polite">
+        <span class="badge__dot" id="badge-dot" aria-hidden="true"></span>
+        <svg class="badge__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span id="badge-text">Push to Main &rarr; ntfy.sh</span>
+        <span class="badge__live">LIVE</span>
+      </div>
+
+      <p class="eyebrow">Integración Continua &middot; ITLA</p>
+      <h1 class="title" id="titulo">Hola Mundo<br /><span class="title__accent">DevOps ITLA</span></h1>
+      <p class="subtitle">
+        Cada <code>push</code> a <code>main</code> dispara un workflow de
+        <strong>GitHub Actions</strong> que notifica en vivo a
+        <strong>ntfy.sh/devops-itla</strong>.
+      </p>
+
+      <!-- Controles iOS -->
+      <div class="actions">
+        <button class="btn btn--primary" id="btn-saludar" type="button">
+          <span class="btn__label">Saludar 👋</span>
+        </button>
+        <button class="btn btn--secondary" id="btn-notificar" type="button">
+          <span class="btn__label">Simular notificación</span>
+        </button>
+      </div>
+
+      <p class="message" id="mensaje" role="status" aria-live="polite"></p>
+
+      <!-- Panel de estado del pipeline -->
+      <section class="pipeline" aria-label="Estado del despliegue">
+        <div class="pipeline__row">
+          <span class="pipeline__label">Rama</span>
+          <code class="pipeline__value">main</code>
+        </div>
+        <div class="pipeline__row">
+          <span class="pipeline__label">Canal</span>
+          <code class="pipeline__value">ntfy.sh/devops-itla</code>
+        </div>
+        <div class="pipeline__row">
+          <span class="pipeline__label">Evento</span>
+          <code class="pipeline__value">push</code>
+        </div>
+        <div class="pipeline__row">
+          <span class="pipeline__label">Última simulación</span>
+          <code class="pipeline__value" id="ultimo-push">—</code>
+        </div>
+      </section>
+
+      <footer class="card__footer">
+        <span class="footer__hint">Hecho con HTML · CSS · JS vanilla</span>
+        <a class="footer__link" href="https://ntfy.sh/devops-itla" target="_blank" rel="noopener">Ver notificaciones en vivo ↗</a>
+      </footer>
+    </article>
+
+    <p class="credit">Práctica CI &mdash; GitHub Actions + ntfy.sh &middot; <span id="anio">2026</span></p>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
